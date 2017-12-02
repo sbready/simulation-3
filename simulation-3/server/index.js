@@ -12,7 +12,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-//invoke massive with db connection
+massive(process.env.DB_CONNECTION).then( db => {app.set ('db', db)})
 app.use(session({
     secret: process.env.SESSION_SECRET ,
     saveUninitialized: true,
@@ -34,11 +34,12 @@ passport.use( new Auth0Strategy({
     const db = app.get('db')
     let userData = profile._json,
         auth_id = userData.user_id.split('|')[1]
+
     db.find_user([auth_id]).then( user =>{
         if (user[0]){
             return done( null, user[0].id)
         } else{
-            db.create_user([userData.picture, auth_id]).then( user =>{
+            db.create_user_by_session([userData.picture, auth_id]).then( user =>{
                 return done (null, user[0].id)
             })
         }
@@ -58,7 +59,7 @@ passport.serializeUser(function(ID, done){
 
 passport.deserializeUser(function(ID, done){
     const db = app.get('db')
-    db.find_user_by_session([ID]).then(user =>{
+    db.find_user_session([ID]).then(user =>{
         done(null,user[0])
     })
 })
@@ -67,7 +68,11 @@ passport.deserializeUser(function(ID, done){
 
 
 app.get('auth/setUser', function (req, res, next){
-    
+    if (!req.user){
+        res.status(401).send('LOGIN REQUIRED')
+    } else {
+        res.redirect('http://localhost:3000/recommended')
+    }
 })
 
 app.get('/auth/authenticated', function (req, res, next){
@@ -81,9 +86,17 @@ app.get('/auth/authenticated', function (req, res, next){
 
 app.get('/auth/logout', function(req, res, next){
     req.logout()
-    res.redirect('http://localhost:3000/#/')
+    res.redirect('http://localhost:3000/')
 })
 
+// app.get('/auth/friend/list', function(req, res, next){
+//     req.user
+
+// })
 
 
+<<<<<<< HEAD
 app.listen(process.env.SERVER_PORT, () => {console.log(`╭∩╮（︶︿︶）╭∩╮:${process.env.SERVER_PORT}`)})
+=======
+app.listen(process.env.SERVER_PORT, () => {console.log(`listening very very closely on port ${process.env.SERVER_PORT}`)})
+>>>>>>> master
