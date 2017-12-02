@@ -88,6 +88,10 @@ app.get('/auth/logout', function(req, res, next){
     res.redirect('http://localhost:3000/')
 })
 
+// app.get('/auth/friend/list', function(req, res, next){
+//     req.user
+
+// })
 
 
 app.listen(process.env.SERVER_PORT, () => {console.log(`listening very very closely on port ${process.env.SERVER_PORT}`)})
