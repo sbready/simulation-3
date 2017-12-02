@@ -11,7 +11,14 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+<<<<<<< HEAD
+massive( process.env.DB_CONNECTION ).then( db => {
+    app.set( 'db', db )
+})
+
+=======
 massive(process.env.DB_CONNECTION).then( db => {app.set ('db', db)})
+>>>>>>> master
 app.use(session({
     secret: process.env.SESSION_SECRET ,
     saveUninitialized: true,
@@ -33,7 +40,6 @@ passport.use( new Auth0Strategy({
     const db = app.get('db')
     let userData = profile._json,
         auth_id = userData.user_id.split('|')[1]
-
     db.find_user([auth_id]).then( user =>{
         if (user[0]){
             return done( null, user[0].id)
@@ -94,4 +100,8 @@ app.get('/auth/logout', function(req, res, next){
 // })
 
 
+<<<<<<< HEAD
+app.listen( process.env.SERVER_PORT, () => console.log(`listening very very closely on port: ${process.env.SERVER_PORT}`) )
+=======
 app.listen(process.env.SERVER_PORT, () => {console.log(`listening very very closely on port ${process.env.SERVER_PORT}`)})
+>>>>>>> master
