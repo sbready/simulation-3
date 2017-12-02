@@ -1,1 +1,1 @@
-select * from Friends where auth_id = $1
+select * from Friends where auth_id = $1;
