@@ -73,7 +73,7 @@ app.get('auth/setUser', function (req, res, next){
     if (!req.user){
         res.status(401).send('LOGIN REQUIRED')
     } else {
-        res.redirect('http://localhost:3000/recommended')
+        res.redirect('http://localhost:3000/dashboard')
     }
 })
 

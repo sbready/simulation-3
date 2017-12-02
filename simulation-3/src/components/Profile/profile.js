@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header } from './../Header/Header';
+import Header from './../Header/Header';
 import { connect } from 'react-redux';
 import { getUser } from './../../ducks/users';
 

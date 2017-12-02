@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-function Header() {
+export default class Header extends Component {
+    render(){
     return (
         <div className="header">
             <div className="header_left">
@@ -15,7 +16,7 @@ function Header() {
                 <h4 className="logout_text">Logout</h4>
             </div>
         </div>
-    )
+        )
+    }
 }
 
-export default Header;

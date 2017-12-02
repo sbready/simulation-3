@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header } from './../Header/Header';
+import Header from './../Header/Header';
 import { connect } from 'react-redux';
 import { getUser } from './../../ducks/users';
 
@@ -12,7 +12,7 @@ class Dashboard extends Component {
     render(){
         return(
             <div>
-                <Header/>
+                <Header />
                 <div className="upperDiv">
                     <div className="leftDiv">
                         <img className="profile_pic" src={this.props.userData.picture} alt="" />
@@ -20,7 +20,7 @@ class Dashboard extends Component {
                         <button className="edit_profile">Edit Profile</button>
                     </div>
                     <div className="rightDiv">
-                        <H4>Welcome to Helo! Find recommended friends based on your similarities, and even search for them by name.  The more you update your profile, the better recommendations we can make!</H4>
+                        <h4>Welcome to Helo! Find recommended friends based on your similarities, and even search for them by name.  The more you update your profile, the better recommendations we can make!</h4>
                     </div>
                 </div>
                 <div className="lowerDiv">

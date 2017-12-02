@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Login from './components/Login/Login'
+import Login from './components/Login/Login';
+import Dashboard from './components/Dashboard/Dashboard';
+import Profile from './components/Profile/profile';
 
 import './App.css';
 
@@ -9,9 +11,11 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        <div className="App">
-          <Route exact path="/" component={Login} />
-        </div>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route path='/dashboard' component={Dashboard} />
+            <Route path='/profile' component={Profile} />
+          </Switch>
       </HashRouter>
     );
   }
