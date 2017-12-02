@@ -13,3 +13,5 @@ CREATE TABLE Friends (
     img TEXT,
     auth_id TEXT
 );
+
+-- CREATE TABLE trackedFriends ( friends_id int foreign key (id) references Friends(id) )  ??
