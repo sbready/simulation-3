@@ -8,17 +8,14 @@ const express = require('express')
     , massive = require('massive')
 
 const app = express()
+
 app.use(cors())
 app.use(bodyParser.json())
 
-<<<<<<< HEAD
 massive( process.env.DB_CONNECTION ).then( db => {
     app.set( 'db', db )
 })
 
-=======
-massive(process.env.DB_CONNECTION).then( db => {app.set ('db', db)})
->>>>>>> master
 app.use(session({
     secret: process.env.SESSION_SECRET ,
     saveUninitialized: true,
@@ -99,9 +96,5 @@ app.get('/auth/logout', function(req, res, next){
 
 // })
 
+app.listen(process.env.SERVER_PORT, () => {console.log(`╭∩╮（︶︿︶）╭∩╮:${process.env.SERVER_PORT}`)})
 
-<<<<<<< HEAD
-app.listen( process.env.SERVER_PORT, () => console.log(`listening very very closely on port: ${process.env.SERVER_PORT}`) )
-=======
-app.listen(process.env.SERVER_PORT, () => {console.log(`listening very very closely on port ${process.env.SERVER_PORT}`)})
->>>>>>> master

@@ -1,3 +1,4 @@
+//reducer file
 import axios from 'axios';
 
 const initialState ={
@@ -7,7 +8,7 @@ const initialState ={
 const GET_USER = 'GET_USER';
 
 export function getUser(){
-    const userInfo = axios.get('/auth/me')
+    const userInfo = axios.get('/auth/me') //axios have _pending, _fulfilled, _rejected as options
     .then( res => res.data )
     return {
         type: GET_USER,
@@ -15,6 +16,7 @@ export function getUser(){
     }
 }
 
+//reducer
 export default function reducer ( state = initialState, action ) {
     switch (action.type) {
         case GET_USER + '_FULFILLED':
