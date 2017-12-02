@@ -1,20 +1,21 @@
 require('dotenv').config()
 const express = require('express')
-    , bodyParser = require('cors')
+    , bodyParser = require('body-parser')
     , cors = require('cors')
     , session = require('express-session')
     , passport = require('passport')
-    , Auth0Strategy = require('massive-auth0')
+    , Auth0Strategy = require('passport-auth0')
     , massive = require('massive')
 
 const app = express()
+
 app.use(cors())
 app.use(bodyParser.json())
 
 //invoke massive with db connection
 app.use(session({
     secret: process.env.SESSION_SECRET ,
-    saveUnitialized: true,
+    saveUninitialized: true,
     resave: false
 })) 
 
@@ -26,8 +27,8 @@ app.use(passport.session())
 passport.use( new Auth0Strategy({
     domain: process.env.AUTH_DOMAIN,
     clientID: process.env.AUTH_CLIENT_ID,
-    clientSECRET: process.env.AUTH_CLIENT_SECRET,
-    callbackurl: process.env.AUTH_CALLBACK,
+    clientSecret: process.env.AUTH_CLIENT_SECRET,
+    callbackURL: process.env.AUTH_CALLBACK,
 
 }, function(accessToken, refreshToken, extraParams, profile, done){
     const db = app.get('db')
@@ -85,4 +86,4 @@ app.get('/auth/logout', function(req, res, next){
 
 
 
-app.listen(process.env.SERVER_PORT), () => {console.log('listening very very closely on port 3005')}
+app.listen(process.env.SERVER_PORT, () => {console.log(`╭∩╮（︶︿︶）╭∩╮:${process.env.SERVER_PORT}`)})
